@@ -16,3 +16,14 @@ ENV PATH="$VIRTUALENV/bin:$PATH"
 COPY --chown=realpython pyproject.toml constraints.txt ./
 RUN python -m pip install --upgrade pip setuptools && \
     python -m pip install --no-cache-dir -c constraints.txt ".[dev]"
+
+COPY --chown=realpython src/ src/
+COPY --chown=realpython test/ test/
+
+RUN python -m pip install . -c constraints.txt && \
+    python -m pytest test/unit/ && \
+    python -m flake8 src/ && \
+    python -m isort src/ --check && \
+    python -m black src/ --check --quiet && \
+    python -m pylint src/ --disable=c0114,C0116,R1705 && \
+    python -m bandit -r src/ --quiet
