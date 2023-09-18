@@ -12,3 +12,7 @@ WORKDIR /home/realpython
 ENV VIRTUALENV=/home/realpython/venv
 RUN python3 -m venv $VIRTUALENV
 ENV PATH="$VIRTUALENV/bin:$PATH"
+
+COPY --chown=realpython pyproject.toml constraints.txt ./
+RUN python -m pip install --upgrade pip setuptools && \
+    python -m pip install --no-cache-dir -c constraints.txt ".[dev]"
