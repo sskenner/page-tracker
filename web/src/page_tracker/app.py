@@ -9,7 +9,8 @@ from redis import Redis, RedisError
 app = Flask(__name__)
 
 
-@app.get("/")
+# @app.get("/")
+@app.route("/")
 def index():
     try:
         page_views = redis().incr("page_views")
