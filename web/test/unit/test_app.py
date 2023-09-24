@@ -26,5 +26,5 @@ def test_should_handle_redis_connection_error(mock_redis, http_client):
     # assert response.status_code == 200
     assert response.status_code == 500
     # assert response.text == "This page has been seen 5 times."
-    assert response.text == "Sorry, something went wrong \N{pensive face}"
+    assert response.text == "Sorry, something went wrong \N{thinking face}"
     #mock_redis.return_value.incr.assert_called_once_with("page_views")
